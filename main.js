@@ -1,14 +1,14 @@
 String.prototype.plus = function (stringToAdd) {
-  const firstParam = Number(this);
-  const secondParam = Number(stringToAdd);
+  const firstParam = BigInt(this);
+  const secondParam = BigInt(stringToAdd);
   let result = firstParam + secondParam;
   console.log(result);
   return(result);
 }
 
 String.prototype.minus = function (stringToSubtract) {
-  const firstParam = Number(this);
-  const secondParam = Number(stringToSubtract);
+  const firstParam = BigInt(this);
+  const secondParam = BigInt(stringToSubtract);
   let result = (firstParam > secondParam) ? 
     firstParam - secondParam :
      'wrong params';
@@ -17,23 +17,23 @@ String.prototype.minus = function (stringToSubtract) {
 }
 
 String.prototype.divide = function (stringToDivideBy) {
-  const firstParam = Number(this);
-  const secondParam = Number(stringToDivideBy);
-  let result = Math.round(firstParam / secondParam);
+  const firstParam = BigInt(this);
+  const secondParam = BigInt(stringToDivideBy);
+  let result = firstParam / secondParam;
   console.log(result);
   return(result);
 }
 
 String.prototype.multiply = function (stringToMultiply) {
-  const firstParam = Number(this);
-  const secondParam = Number(stringToMultiply);
+  const firstParam = BigInt(this);
+  const secondParam = BigInt(stringToMultiply);
   let result = firstParam * secondParam;
   console.log(result);
   return(result);
 }
 
-let a = "3";
-a.plus("2");
+let a = "90099999999999999999";
+a.plus("9099999999999999999999999");
 a.minus("2");
 a.minus("4");
 a.divide("4");
