@@ -1,41 +1,130 @@
 String.prototype.plus = function (stringToAdd) {
-  const firstParam = BigInt(this);
-  const secondParam = BigInt(stringToAdd);
-  let result = firstParam + secondParam;
+  let item1 = this;
+  let item2 = stringToAdd;
+  let result = '';
+  let digitToMemory = 0;
+  while (item1.length || item2.length) {
+    let item1LastDigit = item1.length ? Number(item1.at(-1)) : 0;
+    let item2LastDigit = item2.length ? Number(item2.at(-1)) : 0;
+    let lastDigitsSum = item1LastDigit + item2LastDigit + digitToMemory;
+    digitToAdd = lastDigitsSum % 10;
+    digitToMemory = (lastDigitsSum - digitToAdd) / 10;
+    
+    result = digitToAdd + result;
+    if (item1.length) {
+      item1 = item1.slice(0, -1);
+    }
+
+    if (item2.length) {
+      item2 = item2.slice(0, -1);
+    }
+  }
+  
   console.log(result);
   return(result);
 }
 
 String.prototype.minus = function (stringToSubtract) {
-  const firstParam = BigInt(this);
-  const secondParam = BigInt(stringToSubtract);
-  let result = (firstParam > secondParam) ? 
-    firstParam - secondParam :
-     'wrong params';
+  let item1 = this;
+  let item2 = stringToSubtract;
+  let result = '';
+  let digitToMemory = 0;
+  if (item1.length < item2.length) {
+    result = 'check you input data';
+    console.log(result);
+    return(result);
+  }
+  let count = 1;
+  while (item1.length > 1) {
+    let item1LastDigit = item1.length ? Number(item1.at(-1)) : 0;
+    let item2LastDigit = item2.length ? Number(item2.at(-1)) : 0;
+    let lastDigitsSubstract = 0;
+    if (item1LastDigit - digitToMemory < item2LastDigit) {
+      lastDigitsSubstract = item1LastDigit - item2LastDigit -  digitToMemory + 10;
+      digitToMemory = 1;
+    } else {
+      lastDigitsSubstract = item1LastDigit - item2LastDigit -  digitToMemory;
+      digitToMemory = 0;
+    }
+    result = lastDigitsSubstract + result;
+    if (item1.length) {
+      item1 = item1.slice(0, -1);
+      item2 = item2.slice(0, -1);
+    }
+  }
+
+  let lastDigitsSubstract = Number(item2[0]) ? Number(item1[0]) - Number(item2[0]) -  digitToMemory : Number(item1[0]) -  digitToMemory;
+
+  if (item2.length && lastDigitsSubstract < 0) {
+    result = 'check you input data';
+    console.log(result);
+    return(result);
+  }
+
+  result = lastDigitsSubstract + result;
+
+  for (let i = result.length; i > 1; i--){
+    if (result.startsWith("0")) {
+      result = result.slice(1);
+    }
+  };
+  
   console.log(result);
   return(result);
 }
 
 String.prototype.divide = function (stringToDivideBy) {
-  const firstParam = BigInt(this);
-  const secondParam = BigInt(stringToDivideBy);
-  let result = firstParam / secondParam;
+  let result = Math.round(this / stringToDivideBy);
   console.log(result);
   return(result);
 }
 
 String.prototype.multiply = function (stringToMultiply) {
-  const firstParam = BigInt(this);
-  const secondParam = BigInt(stringToMultiply);
-  let result = firstParam * secondParam;
+  let item1 = this;
+  let item2 = stringToM;
+  let result = '';
+  let digitToMemory = 0;
+  while (item1.length || item2.length) {
+    let item1LastDigit = item1.length ? Number(item1.at(-1)) : 0;
+    let item2LastDigit = item2.length ? Number(item2.at(-1)) : 0;
+    let lastDigitsSum = item1LastDigit + item2LastDigit + digitToMemory;
+    digitToAdd = lastDigitsSum % 10;
+    digitToMemory = (lastDigitsSum - digitToAdd) / 10;
+    
+    result = digitToAdd + result;
+    if (item1.length) {
+      item1 = item1.slice(0, -1);
+    }
+
+    if (item2.length) {
+      item2 = item2.slice(0, -1);
+    }
+  }
+  
   console.log(result);
   return(result);
 }
 
-let a = "90099999999999999999";
-a.plus("9099999999999999999999999");
-a.minus("2");
-a.minus("4");
-a.divide("4");
-a.divide("3");
-a.multiply("4");
+
+let a = "111111111111111111111111111111111111111111111111";
+a.plus("22222222222222222222222222222222");
+
+let b = "119";
+b.minus("119");
+// let a = "9999";
+// a.plus("222222");
+
+
+// a.minus("2");
+// a.minus("4");
+// a.divide("4");
+// a.divide("3");
+// a.multiply("4");
+
+// let a = "33";
+// a.plus("12");
+// a.minus("2");
+// a.minus("4");
+// a.divide("4");
+// a.divide("3");
+// a.multiply("4");
