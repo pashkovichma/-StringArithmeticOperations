@@ -75,42 +75,42 @@ String.prototype.minus = function (stringToSubtract) {
 
 String.prototype.divide = function (stringToDivideBy) {
   let result = Math.round(this / stringToDivideBy);
-  console.log(result);
   return(result);
 }
 
 String.prototype.multiply = function (stringToMultiply) {
-  let item1 = this;
-  let item2 = stringToM;
+  let item1 = (this.length > stringToMultiply.length) ? this : stringToMultiply;
+  let item2 = (this.length > stringToMultiply.length) ? stringToMultiply : this;
   let result = '';
-  let digitToMemory = 0;
-  while (item1.length || item2.length) {
-    let item1LastDigit = item1.length ? Number(item1.at(-1)) : 0;
-    let item2LastDigit = item2.length ? Number(item2.at(-1)) : 0;
-    let lastDigitsSum = item1LastDigit + item2LastDigit + digitToMemory;
-    digitToAdd = lastDigitsSum % 10;
-    digitToMemory = (lastDigitsSum - digitToAdd) / 10;
-    
-    result = digitToAdd + result;
-    if (item1.length) {
-      item1 = item1.slice(0, -1);
+  
+  for (let i = item2.length; i > 0; i--){
+    let item2LastDigit = Number(item2[i-1]);
+    let digitToMemory = 0;
+    let intermediateResult = '';
+    for (let j = item1.length; j > 0; j--){
+      let item1LastDigit = Number(item1[j-1]);
+      let thisStapMultiplication = item2LastDigit * item1LastDigit;
+      let thisStapMultiplicationWithMemory = digitToMemory + thisStapMultiplication;
+      let lastDigitIntermediateResult = thisStapMultiplicationWithMemory % 10;
+      intermediateResult = (j > 1) ?
+                           (lastDigitIntermediateResult + intermediateResult) :
+                           (thisStapMultiplicationWithMemory + intermediateResult);
+      digitToMemory = Math.trunc(thisStapMultiplicationWithMemory / 10);
     }
 
-    if (item2.length) {
-      item2 = item2.slice(0, -1);
-    }
+    result = result.plus((intermediateResult * Math.pow(10, item2.length - i)).toString());
   }
-  
-  console.log(result);
+  console.log(`result: ${result}`);
   return(result);
 }
 
 
-let a = "111111111111111111111111111111111111111111111111";
-a.plus("22222222222222222222222222222222");
+// let a = "111111111111111111111111111111111111111111111111";
+// a.plus("22222222222222222222222222222222");
 
-let b = "119";
-b.minus("119");
+let c = "789";
+c.multiply("3456");
+ 
 // let a = "9999";
 // a.plus("222222");
 
