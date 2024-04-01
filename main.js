@@ -75,7 +75,7 @@ String.prototype.minus = function (stringToSubtract) {
 
   if (item2.length && lastDigitsSubstract < 0) {
     result = 'check you input data';
-    //console.log(result);
+    console.log(result);
     return(result);
   }
 
@@ -87,7 +87,7 @@ String.prototype.minus = function (stringToSubtract) {
     }
   };
   
-  //console.log(result);
+  console.log(result);
   return(result);
 }
 
@@ -113,73 +113,34 @@ String.prototype.multiply = function (stringToMultiply) {
 
     result = result.plus((intermediateResult * Math.pow(10, item2.length - i)).toString());
   }
-  //console.log(`result: ${result}`);
+  console.log(`result: ${result}`);
   return(result);
 }
 
-String.prototype.divide = function (stringToDivideBy) {
-  let first = this; 
-  let second = stringToDivideBy;
-  let result;
+String.prototype.divide = function(stringToDivideBy) {
+  let first = this;
+  const second = stringToDivideBy;
+  let result = '';
+  let intermediateResult = 0;
+  let intermediateDivide = '';
+
   if (!checkForLess(first, second)) {
     result = 'check you input data';
     console.log(result);
     return result;
   }
-  let intermediateResult = '0';
-  let dividedDigit = checkForLess(first.substring(0, second.length), second) ?
-  first.substring(0, second.length) :
-  first.substring(0, second.length + 1);
-  for (let i = first.length; i > 0; i--) {
-    console.log(i);
-    let multiplyBy = '1';
-    multiplyBy.multiply(dividedDigit);
-    // console.log(second);
-    // console.log(multiplyBy.multiply(dividedDigit));
-    // console.log(checkForLess( multiplyBy.multiply(dividedDigit), second));
-      console.log(multiplyBy);
-      multiplyBy = multiplyBy.plus('1');
-      console.log(multiplyBy);
-      console.log(multiplyBy.multiply(dividedDigit));
-    // while (checkForLess( second, multiplyBy.multiply(dividedDigit))){
-    //   console.log(multiplyBy);
-    //   multiplyBy = multiplyBy.plus('1');
-    //   console.log(multiplyBy);
-    // }
-    //console.log(multiplyBy);
+
+  for (let i = 0; i < first.length; i++) {
+      intermediateDivide = intermediateDivide + first[i];
+      
+      while (Number(intermediateDivide) >= Number(second)) {
+        intermediateDivide = intermediateDivide.minus(second);
+        intermediateResult++;
+      }
+      result = result + intermediateResult.toString();
+      intermediateResult = 0;
   }
-  result = 1;
-  //console.log(result);
-  return(result);
-}
-
-let a = '76111';
-a.divide('77');
-
-// let a = "9999";
-// a.plus('99990');
-
-
-// let a = "111111111111111111111111111111111111111111111111";
-// a.plus("22222222222222222222222222222222");
-
-// let c = "1111";
-// c.minus("9999");
- 
-// let a = "9999";
-// a.plus("222222");
-
-
-// a.minus("2");
-// a.minus("4");
-// a.divide("4");
-// a.divide("3");
-// a.multiply("4");
-
-// let a = "33";
-// a.plus("12");
-// a.minus("2");
-// a.minus("4");
-// a.divide("4");
-// a.divide("3");
-// a.multiply("4");
+  result = result.replace(/^0+/, '');
+  console.log(`result: ${result}`);
+  return result;
+};
