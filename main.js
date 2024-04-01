@@ -19,6 +19,9 @@ String.prototype.plus = function (stringToAdd) {
       item2 = item2.slice(0, -1);
     }
   }
+  result = digitToMemory ? 
+    (digitToMemory + result):
+    result;
   
   console.log(result);
   return(result);
@@ -104,12 +107,15 @@ String.prototype.multiply = function (stringToMultiply) {
   return(result);
 }
 
+// let a = "9999";
+// a.plus('99990');
+
 
 // let a = "111111111111111111111111111111111111111111111111";
 // a.plus("22222222222222222222222222222222");
 
-let c = "789";
-c.multiply("3456");
+let c = "111";
+c.multiply("1111");
  
 // let a = "9999";
 // a.plus("222222");
