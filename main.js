@@ -50,7 +50,6 @@ String.prototype.minus = function (stringToSubtract) {
   let digitToMemory = 0;
   if (item1.length < item2.length) {
     result = 'check you input data';
-    console.log(result);
     return(result);
   }
   while (item1.length > 1) {
@@ -75,7 +74,6 @@ String.prototype.minus = function (stringToSubtract) {
 
   if (item2.length && lastDigitsSubstract < 0) {
     result = 'check you input data';
-    console.log(result);
     return(result);
   }
 
@@ -87,7 +85,6 @@ String.prototype.minus = function (stringToSubtract) {
     }
   };
   
-  console.log(result);
   return(result);
 }
 
@@ -109,11 +106,11 @@ String.prototype.multiply = function (stringToMultiply) {
                            (lastDigitIntermediateResult + intermediateResult) :
                            (thisStapMultiplicationWithMemory + intermediateResult);
       digitToMemory = Math.trunc(thisStapMultiplicationWithMemory / 10);
+
     }
 
-    result = result.plus((intermediateResult * Math.pow(10, item2.length - i)).toString());
+    result = result.plus((intermediateResult + "0".repeat(item2.length - i)).toString());
   }
-  console.log(`result: ${result}`);
   return(result);
 }
 
@@ -126,7 +123,6 @@ String.prototype.divide = function(stringToDivideBy) {
 
   if (!checkForLess(first, second)) {
     result = 'check you input data';
-    console.log(result);
     return result;
   }
 
@@ -141,6 +137,5 @@ String.prototype.divide = function(stringToDivideBy) {
       intermediateResult = 0;
   }
   result = result.replace(/^0+/, '');
-  console.log(`result: ${result}`);
   return result;
 };
